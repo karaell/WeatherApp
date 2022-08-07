@@ -87,6 +87,10 @@ h6 {
 }
 
 /* -------------------------- */
+body {
+  background-color: rgba(188, 197, 207, 0.8);
+}
+
 .weather__wrapper {
   max-width: 1440px;
   width: 100%;

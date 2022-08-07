@@ -1,3 +1,6 @@
+import "../css/Body.css"
+
+
 import { NowBlock } from "./BodyComponents/NowBlock";
 import { DetailsBlock } from "./BodyComponents/DetailsBlock";
 import { ForecastBlock } from "./BodyComponents/ForecastBlock";
