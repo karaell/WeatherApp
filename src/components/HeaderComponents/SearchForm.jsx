@@ -1,17 +1,45 @@
-import search from "/0 Projects/WeatherApp/src/img/search.svg"
+import search from "/0 Projects/WeatherApp/src/img/search.svg";
+import { useState } from "react";
+import { useDispatch } from "react-redux/es/exports";
+import { installCityName } from "../../store/slices/cityNameSlice";
 
 export function SearchForm() {
+  const dispatch = useDispatch();
+
+  const [cityName, setCityName] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    dispatch(installCityName(e.target[0].value));
+
+    setCityName("");
+  }
+
+  function handleInputChange(e) {
+    e.preventDefault();
+
+    setCityName(e.target.value);
+  }
+
   return (
-    <form className="weather__search-form search-form">
-      <SearchInput />
+    <form className="weather__search-form search-form" onSubmit={handleSubmit}>
+      <SearchInput cityName={cityName} onChange={handleInputChange} />
       <SearchBtn />
     </form>
   );
 }
 
-function SearchInput() {
+function SearchInput(props) {
+  const { cityName, onChange } = props;
+
   return (
-    <input className="search-form__input" />
+    <input
+      className="search-form__input"
+      type="text"
+      value={cityName}
+      onChange={onChange}
+    />
   );
 }
 
@@ -19,7 +47,7 @@ function SearchBtn() {
   return (
     <div className="search-form__btn">
       <button>
-        <img src={search} alt="search"/>
+        <img src={search} alt="search" />
       </button>
     </div>
   );
