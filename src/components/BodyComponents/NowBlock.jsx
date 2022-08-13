@@ -3,14 +3,19 @@ import { format } from "date-fns";
 
 import rain from "/0 Projects/WeatherApp/src/img/weather-icons/rain.svg";
 
+const URL = {
+  ICON_WEATHER: "https://openweathermap.org/img/wn/",
+};
+
 export function NowBlock() {
   const weatherDataObj = useSelector(state => state.weatherDataNowReducer.weatherDataNow);
-  // console.log(Date.now())
+  const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png`;
+
   return (
     <div className="body__now now">
       <NowInfo weatherData={weatherDataObj} />
       <div className="now__weather-icon">
-        <img src={rain} alt="weather-icon" />
+        <img src={iconWeather} alt="weather-icon" />
       </div>
       <NowDetails weatherData={weatherDataObj} />
     </div>
