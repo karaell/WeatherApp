@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
 
 export function DetailsBlock() {
   const weatherDataObj = useSelector(
@@ -9,9 +10,9 @@ export function DetailsBlock() {
     <div className="body__details details">
       <DetailItem title="Humidity" subtitle={weatherDataObj.main?.humidity + " %"} />
       <DetailItem title="Wind speed" subtitle={weatherDataObj.wind?.speed + " k/h"} />
-      <DetailItem title="Visiblity" subtitle={weatherDataObj.visibility + " km"} />
-      <DetailItem title="Sunrise" subtitle={weatherDataObj.sys?.sunrise} />
-      <DetailItem title="Sunset" subtitle={weatherDataObj.sys?.sunset} />
+      <DetailItem title="Visiblity" subtitle={weatherDataObj.visibility/1000 + " km"} />
+      <DetailItem title="Sunrise" subtitle={convertTime(weatherDataObj.sys?.sunrise)} />
+      <DetailItem title="Sunset" subtitle={convertTime(weatherDataObj.sys?.sunset)} />
     </div>
   );
 }
@@ -25,4 +26,15 @@ function DetailItem(props) {
       <div className="details__item-subtitle">{subtitle}</div>
     </div>
   );
+}
+
+
+function convertTime(unixTime) {
+  try {
+    const time = unixTime * 1000;
+
+    return format(time, "hh:mm aaa");
+  } catch (err) {
+    console.log(err)
+  }
 }

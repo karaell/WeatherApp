@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
+
 import rain from "/0 Projects/WeatherApp/src/img/weather-icons/rain.svg";
 
 export function NowBlock() {
   const weatherDataObj = useSelector(state => state.weatherDataNowReducer.weatherDataNow);
-
+  // console.log(Date.now())
   return (
     <div className="body__now now">
       <NowInfo weatherData={weatherDataObj} />
@@ -21,7 +23,7 @@ function NowInfo(props) {
   return (
     <div className="now__info">
       <div className="now__info-city-name">{weatherData.name}</div>
-      <div className="now__info-data-time">{weatherData.dt}</div>
+      <div className="now__info-data-time">{convertTime(weatherData.dt)}</div>
       <div className="now__info-degree">{Math.round(weatherData.main?.temp)}°C</div>
     </div>
   );
@@ -48,4 +50,15 @@ function NowDetailItem(props) {
       <div className="now__details-item-subtitle">{subtitle}</div>
     </div>
   );
+}
+
+function convertTime(unixTime) {
+  try {
+    const time = unixTime * 1000;
+
+    return format(time, "EEEE hh:mm aaa");
+  } catch (err) {
+    console.log(err)
+  }
+  
 }
