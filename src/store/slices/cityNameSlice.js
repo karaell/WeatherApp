@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    city: "",
-}
+  city: "Moscow",
+};
 
 export const cityNameSlice = createSlice({
-    name: "city",
-    initialState,
-    reducers: {
-        installCityName: (state, action) => {
-            state.city = action.payload;
-        }
-    }
-})
+  name: "city",
+  initialState,
+  reducers: {
+    installCityName: (state, action) => {
+      state.city = action.payload;
+    },
+  },
+});
 
 export const { installCityName } = cityNameSlice.actions;

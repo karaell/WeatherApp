@@ -12,12 +12,12 @@
 }
 .now__info-city-name {
   font-size: 35px;
-  line-height: 38px;
+  line-height: 48px;
   font-weight: 400;
   margin-bottom: 10px;
 }
 .now__info-data-time {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 21px;
   font-weight: 400;
   margin-bottom: 20px;
@@ -27,8 +27,12 @@
   line-height: 100px;
   font-weight: 500;
 }
-.now__forecast-items-row {
-  max-width: 837px;
+.now__weather-icon img {
+  width: 173px;
+  height: 162px;
+}
+.now__details-items {
+  max-width: 545px;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -38,23 +42,22 @@
           justify-content: space-between;
 }
 
-.forecast-item {
+.now__details-item {
   text-align: center;
+  margin: auto 0;
 }
-.forecast-item__time {
+.now__details-item-title {
+  font-size: 32px;
+  line-height: 37px;
+  font-weight: 400;
   color: rgba(52, 58, 64, 0.8);
-  font-size: 32px;
-  line-height: 37px;
-  font-weight: 400;
-  margin-bottom: 20px;
+  margin-bottom: 32px;
 }
-.forecast-item__weather-icon {
-  margin-bottom: 25px;
-}
-.forecast-item__degree {
-  font-size: 32px;
-  line-height: 37px;
-  font-weight: 400;
+.now__details-item-subtitle {
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 700;
+  color: #343A40;
 }
 
 /* ---------------DETAILS BLOCK-------------- */

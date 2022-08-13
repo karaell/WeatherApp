@@ -3,14 +3,16 @@ const API = {
 };
 
 const URL = {
-  server: "https://api.openweathermap.org/data/2.5/weather",
+  now: "https://api.openweathermap.org/data/2.5/weather",
   forecast: "https://api.openweathermap.org/data/2.5/forecast",
 };
 
-export async function getWeatherData(cityName) {
-  const url = `${URL.forecast}?q=${cityName}&appid=${API.key}`;
+export async function getWeatherDataNow(cityName) {
+  const url = `${URL.now}?q=${cityName}&appid=${API.key}&units=metric`;
 
-  const response = await fetch(url);
-  const obj = await response.json();
-  console.log(obj);
+  const responseWeatherDataNow = await fetch(url);
+  const objWeatherDataNow = await responseWeatherDataNow.json();
+
+  return objWeatherDataNow;
+  // console.log(objWeatherDataNow);
 }

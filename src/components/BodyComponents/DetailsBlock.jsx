@@ -1,17 +1,23 @@
+import { useSelector } from "react-redux";
+
 export function DetailsBlock() {
-    return (
-      <div className="body__details details">
-        <DetailItem title="Chance of rain" subtitle="12%"/>
-        <DetailItem title="Humidity" subtitle="60%"/>
-        <DetailItem title="Wind speed" subtitle="10 k/h"/>
-        <DetailItem title="Visiblity" subtitle="100km"/>
-        <DetailItem title="Pressure" subtitle="1015 hPa"/>
-      </div>
-    );
+  const weatherDataObj = useSelector(
+    (state) => state.weatherDataNowReducer.weatherDataNow
+  );
+
+  return (
+    <div className="body__details details">
+      <DetailItem title="Humidity" subtitle={weatherDataObj.main?.humidity + " %"} />
+      <DetailItem title="Wind speed" subtitle={weatherDataObj.wind?.speed + " k/h"} />
+      <DetailItem title="Visiblity" subtitle={weatherDataObj.visibility + " km"} />
+      <DetailItem title="Sunrise" subtitle={weatherDataObj.sys?.sunrise} />
+      <DetailItem title="Sunset" subtitle={weatherDataObj.sys?.sunset} />
+    </div>
+  );
 }
 
 function DetailItem(props) {
-  const {title, subtitle} = props;
+  const { title, subtitle } = props;
 
   return (
     <div className="details__item">

@@ -43,13 +43,13 @@ function ForecastInfoItem() {
     );
 } */
 
-const forecastCategoryNames = ["date", "time", "chance of rain", "humidity", "wind", "temperature"]
+const forecastCategoryNames = ["date", "time", "feels like", "humidity", "wind", "temperature"]
 
 const forecastWeatherInfo = [
   {
     date: "17 May",
     time: "07:08",
-    "chance_of_rain": "20%",
+    "feels_like": "20%",
     humidity: "7%",
     wind: "10 kmh",
     temperature: "19",
@@ -57,7 +57,7 @@ const forecastWeatherInfo = [
   {
     date: "17 May",
     time: "07:08",
-    "chance_of_rain": "20%",
+    "feels_like": "20%",
     humidity: "7%",
     wind: "10 kmh",
     temperature: "19",
@@ -65,7 +65,7 @@ const forecastWeatherInfo = [
   {
     date: "17 May",
     time: "07:08",
-    "chance_of_rain": "20%",
+    "feels_like": "20%",
     humidity: "7%",
     wind: "10 kmh",
     temperature: "19",
@@ -88,7 +88,7 @@ function ForecastTable() {
         <ForecastTableRow
           date={res.date}
           time={res.time}
-          chance_of_rain={res.chance_of_rain}
+          feels_like={res.feels_like}
           humidity={res.humidity}
           wind={res.wind}
           temperature={res.temperature}
@@ -109,13 +109,13 @@ function ForecastTableHeader() {
 }
 
 function ForecastTableRow(props) {
-  const {date, time, chance_of_rain, humidity, wind, temperature} = props;
+  const {date, time, feels_like, humidity, wind, temperature} = props;
 
   return (
     <ul className="forecast__info-item grid">
       <li>{date}</li>
       <li>{time}</li>
-      <li>{chance_of_rain}</li>
+      <li>{feels_like}</li>
       <li>{humidity}</li>
       <li>{wind}</li>
       <li>{temperature}</li>
