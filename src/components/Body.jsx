@@ -6,9 +6,10 @@ import { useDispatch } from "react-redux";
 import { NowBlock } from "./BodyComponents/NowBlock";
 import { DetailsBlock } from "./BodyComponents/DetailsBlock";
 import { ForecastBlock } from "./BodyComponents/ForecastBlock";
-import { getWeatherDataNow } from "./Request";
+import { getWeatherDataNow, getWeatherDataForecast } from "./Request";
 
 import { installWeatherDataNow } from "../store/slices/weatherDataNowSlice";
+import { installWeatherForecast } from "../store/slices/weatherForecastSlice";
 
 export function Body() {
   const currentCityName = useSelector((state) => state.cityNameReducer.city);
@@ -17,9 +18,11 @@ export function Body() {
   async function showCurrentCity(cityName) {
     try {
       const weatherDataNow = await getWeatherDataNow(cityName);
-      console.log(weatherDataNow)
+      const weatherForecast = await getWeatherDataForecast(cityName);
+      // console.log(weatherForecast)
 
       dispatch(installWeatherDataNow(weatherDataNow));
+      dispatch(installWeatherForecast(weatherForecast));
     } catch (err) {
       console.log(err);
     }
@@ -37,7 +40,3 @@ export function Body() {
     </div>
   );
 }
-
-/* function getWeatherData() {
-
-} */

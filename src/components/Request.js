@@ -10,9 +10,18 @@ const URL = {
 export async function getWeatherDataNow(cityName) {
   const url = `${URL.now}?q=${cityName}&appid=${API.key}&units=metric`;
 
-  const responseWeatherDataNow = await fetch(url);
-  const objWeatherDataNow = await responseWeatherDataNow.json();
+  const responseWeatherNow = await fetch(url);
+  const objWeatherNow = await responseWeatherNow.json();
 
-  return objWeatherDataNow;
+  return objWeatherNow;
   // console.log(objWeatherDataNow);
+}
+
+export async function getWeatherDataForecast(cityName) {
+  const url = `${URL.forecast}?q=${cityName}&appid=${API.key}&units=metric`;
+
+  const responseWeatherForecast = await fetch(url);
+  const objWearherForecast = await responseWeatherForecast.json();
+
+  return objWearherForecast;
 }

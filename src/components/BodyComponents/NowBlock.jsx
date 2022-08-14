@@ -8,7 +8,9 @@ const URL = {
 };
 
 export function NowBlock() {
-  const weatherDataObj = useSelector(state => state.weatherDataNowReducer.weatherDataNow);
+  const weatherDataObj = useSelector(
+    (state) => state.weatherDataNowReducer.weatherDataNow
+  );
   const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png`;
 
   return (
@@ -23,13 +25,15 @@ export function NowBlock() {
 }
 
 function NowInfo(props) {
-  const {weatherData} =  props;
+  const { weatherData } = props;
 
   return (
     <div className="now__info">
       <div className="now__info-city-name">{weatherData.name}</div>
       <div className="now__info-data-time">{convertTime(weatherData.dt)}</div>
-      <div className="now__info-degree">{Math.round(weatherData.main?.temp)}°C</div>
+      <div className="now__info-degree">
+        {Math.round(weatherData.main?.temp)}°C
+      </div>
     </div>
   );
 }
@@ -39,9 +43,18 @@ function NowDetails(props) {
 
   return (
     <div className="now__details-items details-items">
-      <NowDetailItem title="Feels like" subtitle={Math.round(weatherData.main?.feels_like) +"°C"}/>
-      <NowDetailItem title="Max" subtitle={Math.round(weatherData.main?.temp_max) +"°C"} />
-      <NowDetailItem title="Min" subtitle={Math.round(weatherData.main?.temp_min) +"°C"} />
+      <NowDetailItem
+        title="Feels like"
+        subtitle={Math.round(weatherData.main?.feels_like) + "°C"}
+      />
+      <NowDetailItem
+        title="Max"
+        subtitle={Math.round(weatherData.main?.temp_max) + "°C"}
+      />
+      <NowDetailItem
+        title="Min"
+        subtitle={Math.round(weatherData.main?.temp_min) + "°C"}
+      />
     </div>
   );
 }
@@ -63,7 +76,6 @@ function convertTime(unixTime) {
 
     return format(time, "EEEE hh:mm aaa");
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-  
 }
