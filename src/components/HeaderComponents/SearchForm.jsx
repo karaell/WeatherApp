@@ -11,9 +11,23 @@ export function SearchForm() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(installCityName(e.target[0].value));
+    try {
+      const inputValue = e.target[0].value;
 
-    setCityName("");
+      if (inputValue === "" || inputValue.length < 3 ) {
+        throw new Error("Please enter a valid city name");
+      }
+
+      dispatch(installCityName(inputValue)); // какого фига оно все равно происходит?Ё?!?!?!?!?!
+    } catch (err) {
+        console.log(err.message);
+    } finally {
+        setCityName("");
+    }
+
+    // dispatch(installCityName(e.target[0].value));
+
+    // setCityName("");
   }
 
   function handleInputChange(e) {

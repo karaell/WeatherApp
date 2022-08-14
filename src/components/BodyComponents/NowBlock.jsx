@@ -10,13 +10,13 @@ export function NowBlock() {
     (state) => state.weatherDataNowReducer.weatherDataNow
   );
   
-  const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
+  // const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
 
   return (
     <div className="body__now now">
       <NowInfo weatherData={weatherDataObj} />
       <div className="now__weather-icon">
-        <img src={iconWeather} alt="weather-icon" />
+        {/* <img src={iconWeather} alt="weather-icon" /> */}
       </div>
       <NowDetails weatherData={weatherDataObj} />
     </div>

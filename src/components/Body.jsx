@@ -2,6 +2,7 @@ import "../css/Body.css";
 import { useSelector } from "react-redux/es/exports";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import store from "store";
 
 import { NowBlock } from "./BodyComponents/NowBlock";
 import { DetailsBlock } from "./BodyComponents/DetailsBlock";
@@ -14,8 +15,9 @@ import { installWeatherForecast } from "../store/slices/weatherForecastSlice";
 import { convertDate, convertTime } from "../ConvertDateTime";
 
 export function Body() {
-  const currentCityName = useSelector((state) => state.cityNameReducer.city);
+  // const currentCityName = useSelector((state) => state.cityNameReducer.city);
   const dispatch = useDispatch();
+  const currentCityName = store.get("cityName");
 
   async function showCurrentCity(cityName) {
     try {
@@ -43,7 +45,6 @@ export function Body() {
     </div>
   );
 }
-
 
 function getForecastArr(weatherForecastList) {
   const forecastArr = [];
