@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
-import { format } from "date-fns";
-
-import rain from "/0 Projects/WeatherApp/src/img/weather-icons/rain.svg";
+import { convertDateTime } from "../../ConvertDateTime";
 
 const URL = {
   ICON_WEATHER: "https://openweathermap.org/img/wn/",
@@ -11,7 +9,8 @@ export function NowBlock() {
   const weatherDataObj = useSelector(
     (state) => state.weatherDataNowReducer.weatherDataNow
   );
-  const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png`;
+  
+  const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
 
   return (
     <div className="body__now now">
@@ -30,7 +29,7 @@ function NowInfo(props) {
   return (
     <div className="now__info">
       <div className="now__info-city-name">{weatherData.name}</div>
-      <div className="now__info-data-time">{convertTime(weatherData.dt)}</div>
+      <div className="now__info-data-time">{convertDateTime(weatherData.dt)}</div>
       <div className="now__info-degree">
         {Math.round(weatherData.main?.temp)}°C
       </div>
@@ -68,14 +67,4 @@ function NowDetailItem(props) {
       <div className="now__details-item-subtitle">{subtitle}</div>
     </div>
   );
-}
-
-function convertTime(unixTime) {
-  try {
-    const time = unixTime * 1000;
-
-    return format(time, "EEEE hh:mm aaa");
-  } catch (err) {
-    console.log(err);
-  }
 }

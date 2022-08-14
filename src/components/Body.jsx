@@ -11,6 +11,8 @@ import { getWeatherDataNow, getWeatherDataForecast } from "./Request";
 import { installWeatherDataNow } from "../store/slices/weatherDataNowSlice";
 import { installWeatherForecast } from "../store/slices/weatherForecastSlice";
 
+import { convertDate, convertTime } from "../ConvertDateTime";
+
 export function Body() {
   const currentCityName = useSelector((state) => state.cityNameReducer.city);
   const dispatch = useDispatch();
@@ -19,10 +21,11 @@ export function Body() {
     try {
       const weatherDataNow = await getWeatherDataNow(cityName);
       const weatherForecast = await getWeatherDataForecast(cityName);
-      // console.log(weatherForecast)
+
+      const forecastArr = getForecastArr(weatherForecast.list);
 
       dispatch(installWeatherDataNow(weatherDataNow));
-      dispatch(installWeatherForecast(weatherForecast));
+      dispatch(installWeatherForecast(forecastArr));
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +33,7 @@ export function Body() {
 
   useEffect(() => {
     showCurrentCity(currentCityName);
-  });
+  }, [currentCityName]);
 
   return (
     <div className="weather__body body">
@@ -39,4 +42,24 @@ export function Body() {
       <ForecastBlock />
     </div>
   );
+}
+
+
+function getForecastArr(weatherForecastList) {
+  const forecastArr = [];
+
+  for (let i = 0; i < 3; i++) {
+    const weatherForecastItem = {
+      date: convertDate(weatherForecastList[i].dt),
+      time: convertTime(weatherForecastList[i].dt),
+      feels_like: Math.round(weatherForecastList[i].main.feels_like) + "°C",
+      humidity: weatherForecastList[i].main.humidity + " %",
+      wind: weatherForecastList[i].wind.speed + " k/h",
+      temperature: Math.round(weatherForecastList[i].main.temp) + "°C",
+    };
+
+    forecastArr.push(weatherForecastItem);
+  }
+
+  return forecastArr;
 }

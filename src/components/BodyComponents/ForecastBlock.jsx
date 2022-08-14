@@ -44,17 +44,18 @@ function ForecastInfoItem() {
 } */
 
 import { useSelector } from "react-redux";
-import { format } from "date-fns";
 
-const forecastCategoryNames = ["date", "time", "feels like", "humidity", "wind", "temperature"]
+const forecastCategoryNames = [
+  "date",
+  "time",
+  "feels like",
+  "humidity",
+  "wind",
+  "temperature",
+];
 
-const forecastWeatherInfo = [];
 
 export function ForecastBlock() {
-  const weatherForecast = useSelector(state => state.weatherForecastReducer.weatherForecast);
-  console.log(weatherForecast.list)
-
-  getForecastObj(weatherForecast.list)
 
   return (
     <div className="body__forecast forecast">
@@ -64,10 +65,14 @@ export function ForecastBlock() {
 }
 
 function ForecastTable() {
+  const weatherForecast = useSelector(
+    (state) => state.weatherForecastReducer.weatherForecast
+  );
+
   return (
     <div className="forecast__table">
       <ForecastTableHeader />
-      {forecastWeatherInfo.map((res) => (
+      {weatherForecast.map((res) => (
         <ForecastTableRow
           date={res.date}
           time={res.time}
@@ -92,7 +97,7 @@ function ForecastTableHeader() {
 }
 
 function ForecastTableRow(props) {
-  const {date, time, feels_like, humidity, wind, temperature} = props;
+  const { date, time, feels_like, humidity, wind, temperature } = props;
 
   return (
     <ul className="forecast__info-item grid">
@@ -104,33 +109,4 @@ function ForecastTableRow(props) {
       <li>{temperature}</li>
     </ul>
   );
-}
-
-function getForecastObj (weatherForecastList) {
-
-  for (let i = 0; i < 3; i++) {
-
-    const weatherForecastItem = {
-      date: convertDate(weatherForecastList[i].dt),
-      time: convertTime (weatherForecastList[i].dt),
-      feels_like: Math.round(weatherForecastList[i].main.feels_like) + "°C",
-      humidity: weatherForecastList[i].main.humidity + " %",
-      wind: weatherForecastList[i].wind.speed + " k/h",
-      temperature: Math.round(weatherForecastList[i].main.temp) + "°C",
-    };
-
-    forecastWeatherInfo.push(weatherForecastItem);
-  }
-}
-
-function convertTime (unixTime) {
-  const time = unixTime * 1000;
-
-  return format(time, "hh:mm aaa")
-}
-
-function convertDate(unixTime) {
-  const date = unixTime *1000;
-
-  return format(date, "d LLL")
 }

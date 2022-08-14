@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { format } from "date-fns";
+import { convertTime } from "../../ConvertDateTime";
 
 export function DetailsBlock() {
   const weatherDataObj = useSelector(
@@ -26,15 +26,4 @@ function DetailItem(props) {
       <div className="details__item-subtitle">{subtitle}</div>
     </div>
   );
-}
-
-
-function convertTime(unixTime) {
-  try {
-    const time = unixTime * 1000;
-
-    return format(time, "hh:mm aaa");
-  } catch (err) {
-    console.log(err)
-  }
 }
