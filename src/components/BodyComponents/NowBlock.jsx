@@ -9,14 +9,21 @@ export function NowBlock() {
   const weatherDataObj = useSelector(
     (state) => state.weatherDataNowReducer.weatherDataNow
   );
+
+  let iconWeather;
   
+  try {
+    iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
+  } catch (err) {
+    console.log(err)
+  }
   // const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
 
   return (
     <div className="body__now now">
       <NowInfo weatherData={weatherDataObj} />
       <div className="now__weather-icon">
-        {/* <img src={iconWeather} alt="weather-icon" /> */}
+        <img src={iconWeather} alt="weather-icon" />
       </div>
       <NowDetails weatherData={weatherDataObj} />
     </div>

@@ -18,7 +18,7 @@ export function SearchForm() {
         throw new Error("Please enter a valid city name");
       }
 
-      dispatch(installCityName(inputValue)); // какого фига оно все равно происходит?Ё?!?!?!?!?!
+      dispatch(installCityName(inputValue)); 
     } catch (err) {
         console.log(err.message);
     } finally {

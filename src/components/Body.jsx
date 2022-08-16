@@ -15,9 +15,9 @@ import { installWeatherForecast } from "../store/slices/weatherForecastSlice";
 import { convertDate, convertTime } from "../ConvertDateTime";
 
 export function Body() {
-  // const currentCityName = useSelector((state) => state.cityNameReducer.city);
+  const currentCityName = useSelector((state) => state.cityNameReducer.city); // имя в запрос идет из стейта
   const dispatch = useDispatch();
-  const currentCityName = store.get("cityName");
+  // const currentCityName = store.get("cityName");
 
   async function showCurrentCity(cityName) {
     try {
