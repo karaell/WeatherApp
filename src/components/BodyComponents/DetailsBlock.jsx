@@ -8,11 +8,26 @@ export function DetailsBlock() {
 
   return (
     <div className="body__details details">
-      <DetailItem title="Humidity" subtitle={weatherDataObj.main?.humidity + " %"} />
-      <DetailItem title="Wind speed" subtitle={weatherDataObj.wind?.speed + " k/h"} />
-      <DetailItem title="Visiblity" subtitle={weatherDataObj.visibility/1000 + " km"} />
-      <DetailItem title="Sunrise" subtitle={convertTime(weatherDataObj.sys?.sunrise)} />
-      <DetailItem title="Sunset" subtitle={convertTime(weatherDataObj.sys?.sunset)} />
+      <DetailItem
+        title="Humidity"
+        subtitle={checkDetailInfo(weatherDataObj.main?.humidity) + " %"}
+      />
+      <DetailItem
+        title="Wind speed"
+        subtitle={checkDetailInfo(weatherDataObj.wind?.speed) + " k/h"}
+      />
+      <DetailItem
+        title="Visiblity"
+        subtitle={checkDetailInfo(weatherDataObj.visibility) / 1000 + " km"}
+      />
+      <DetailItem
+        title="Sunrise"
+        subtitle={convertTime(weatherDataObj.sys?.sunrise)}
+      />
+      <DetailItem
+        title="Sunset"
+        subtitle={convertTime(weatherDataObj.sys?.sunset)}
+      />
     </div>
   );
 }
@@ -26,4 +41,8 @@ function DetailItem(props) {
       <div className="details__item-subtitle">{subtitle}</div>
     </div>
   );
+}
+
+function checkDetailInfo (value) {
+  return typeof (value) === "undefined" ? "" : value;
 }

@@ -33,12 +33,16 @@ export function NowBlock() {
 function NowInfo(props) {
   const { weatherData } = props;
 
+  const degree = Math.round(weatherData.main?.temp);
+
   return (
     <div className="now__info">
       <div className="now__info-city-name">{weatherData.name}</div>
-      <div className="now__info-data-time">{convertDateTime(weatherData.dt)}</div>
+      <div className="now__info-data-time">
+        {convertDateTime(weatherData.dt)}
+      </div>
       <div className="now__info-degree">
-        {Math.round(weatherData.main?.temp)}°C
+        {convertDegree(Math.round(weatherData.main?.temp))}
       </div>
     </div>
   );
@@ -51,15 +55,15 @@ function NowDetails(props) {
     <div className="now__details-items details-items">
       <NowDetailItem
         title="Feels like"
-        subtitle={Math.round(weatherData.main?.feels_like) + "°C"}
+        subtitle={convertDegree(Math.round(weatherData.main?.feels_like))}
       />
       <NowDetailItem
         title="Max"
-        subtitle={Math.round(weatherData.main?.temp_max) + "°C"}
+        subtitle={convertDegree(Math.round(weatherData.main?.temp_max))}
       />
       <NowDetailItem
         title="Min"
-        subtitle={Math.round(weatherData.main?.temp_min) + "°C"}
+        subtitle={convertDegree(Math.round(weatherData.main?.temp_min))}
       />
     </div>
   );
@@ -74,4 +78,8 @@ function NowDetailItem(props) {
       <div className="now__details-item-subtitle">{subtitle}</div>
     </div>
   );
+}
+
+function convertDegree (degree) {
+  return isNaN(degree) === true ? "" : degree + "°C";
 }

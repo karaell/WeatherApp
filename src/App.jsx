@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     const cityName = store.get("cityName");
-    console.log(cityName)
+    // console.log(cityName)
     dispatch(installCityName(cityName));
   }, [])
 
