@@ -1,14 +1,13 @@
 import { useSelector } from "react-redux";
 import { convertDateTime } from "../../ConvertDateTime";
+import { convertToFahrenheit } from "../../ConvertDegree";
 
 const URL = {
   ICON_WEATHER: "https://openweathermap.org/img/wn/",
 };
 
 export function NowBlock() {
-  const weatherDataObj = useSelector(
-    (state) => state.weatherDataNowReducer.weatherDataNow
-  );
+  const weatherDataObj = useSelector((state) => state.weatherDataNowReducer.weatherDataNow);
 
   let iconWeather;
   
@@ -17,7 +16,6 @@ export function NowBlock() {
   } catch (err) {
     console.log(err)
   }
-  // const iconWeather = `${URL.ICON_WEATHER}${weatherDataObj.weather[0].icon}@4x.png` ;
 
   return (
     <div className="body__now now">
@@ -32,8 +30,9 @@ export function NowBlock() {
 
 function NowInfo(props) {
   const { weatherData } = props;
+  const degreeUnit = useSelector((state) => state.degreeUnitReducer.degreeUnit);
 
-  const degree = Math.round(weatherData.main?.temp);
+  const degree = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp) : weatherData.main?.temp;
 
   return (
     <div className="now__info">
@@ -41,30 +40,29 @@ function NowInfo(props) {
       <div className="now__info-data-time">
         {convertDateTime(weatherData.dt)}
       </div>
-      <div className="now__info-degree">
-        {convertDegree(Math.round(weatherData.main?.temp))}
-      </div>
+      <div className="now__info-degree">{checkDegree(Math.round(degree))}</div>
     </div>
   );
 }
 
 function NowDetails(props) {
   const { weatherData } = props;
+  const degreeUnit = useSelector((state) => state.degreeUnitReducer.degreeUnit);
+
+  // TO_DO: придумать функцию для массовой проверки на фаренгейт
+
+  const feelsLike = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.feels_like) : weatherData.main?.feels_like;
+  const maxTemp = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp_max) : weatherData.main?.temp_max;
+  const minTemp = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp_min) : weatherData.main?.temp_min;
 
   return (
     <div className="now__details-items details-items">
       <NowDetailItem
         title="Feels like"
-        subtitle={convertDegree(Math.round(weatherData.main?.feels_like))}
+        subtitle={checkDegree(Math.round(feelsLike))}
       />
-      <NowDetailItem
-        title="Max"
-        subtitle={convertDegree(Math.round(weatherData.main?.temp_max))}
-      />
-      <NowDetailItem
-        title="Min"
-        subtitle={convertDegree(Math.round(weatherData.main?.temp_min))}
-      />
+      <NowDetailItem title="Max" subtitle={checkDegree(Math.round(maxTemp))} />
+      <NowDetailItem title="Min" subtitle={checkDegree(Math.round(minTemp))} />
     </div>
   );
 }
@@ -80,6 +78,6 @@ function NowDetailItem(props) {
   );
 }
 
-function convertDegree (degree) {
+function checkDegree (degree) {
   return isNaN(degree) === true ? "" : degree + "°C";
 }

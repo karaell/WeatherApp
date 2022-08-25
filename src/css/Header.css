@@ -78,6 +78,9 @@
 .degree__slash {
   margin: 0 4px;
 }
+.degree__bold {
+  font-weight: 700;
+}
 
 /* ---------------FAVORITE CITIES BTN--------------- */
 .header__fav-cities-btn {
