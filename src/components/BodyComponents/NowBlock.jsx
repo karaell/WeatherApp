@@ -30,9 +30,9 @@ export function NowBlock() {
 
 function NowInfo(props) {
   const { weatherData } = props;
-  const degreeUnit = useSelector((state) => state.degreeUnitReducer.degreeUnit);
+  const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
 
-  const degree = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp) : weatherData.main?.temp;
+  const degree = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp) : weatherData.main?.temp;
 
   return (
     <div className="now__info">
@@ -47,13 +47,13 @@ function NowInfo(props) {
 
 function NowDetails(props) {
   const { weatherData } = props;
-  const degreeUnit = useSelector((state) => state.degreeUnitReducer.degreeUnit);
+  const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
 
   // TO_DO: придумать функцию для массовой проверки на фаренгейт
 
-  const feelsLike = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.feels_like) : weatherData.main?.feels_like;
-  const maxTemp = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp_max) : weatherData.main?.temp_max;
-  const minTemp = degreeUnit === "F" ? convertToFahrenheit(weatherData.main?.temp_min) : weatherData.main?.temp_min;
+  const feelsLike = tempScale === "F" ? convertToFahrenheit(weatherData.main?.feels_like) : weatherData.main?.feels_like;
+  const maxTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_max) : weatherData.main?.temp_max;
+  const minTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_min) : weatherData.main?.temp_min;
 
   return (
     <div className="now__details-items details-items">

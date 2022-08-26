@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  degreeUnit: "C",
+  tempScale: "C",
 };
 
-export const degreeUnitSlice = createSlice({
-  name: "degree_unit",
+export const tempScaleSlice = createSlice({
+  name: "temp_scale",
   initialState,
   reducers: {
-    setUnitDegree: (state, action) => {
-      state.degreeUnit = action.payload;
+    setTempScale: (state, action) => {
+      state.tempScale = action.payload;
     },
   },
 });
 
-export const {setUnitDegree} = degreeUnitSlice.actions;
+export const {setTempScale} = tempScaleSlice.actions;

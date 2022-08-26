@@ -1,49 +1,5 @@
-/* export function ForecastBlock() {
-    return (
-        <div className="body__forecast forecast grid">
-            <ForecastTitleRow />
-            <ForecastInfo />
-        </div>
-    )
-}
-
-function ForecastTitleRow() {
-    return (
-      <ul className="forecast__title-row title-row">
-        <li className="title-row__item">date</li>
-        <li className="title-row__item">time</li>
-        <li className="title-row__item">chance of rain</li>
-        <li className="title-row__item">humidity</li>
-        <li className="title-row__item">wind</li>
-        <li className="title-row__item">temperature</li>
-      </ul>
-    );
-}
-
-function ForecastInfo() {
-    return (
-      <div className="forecast__info">
-        <ForecastInfoItem />
-        <ForecastInfoItem />
-        <ForecastInfoItem />
-      </div>
-    );
-}
-
-function ForecastInfoItem() {
-    return (
-      <ul className="forecast__info-item">
-        <li>17 May</li>
-        <li>07:09</li>
-        <li>9%</li>
-        <li>57%</li>
-        <li>10 km\h</li>
-        <li>19</li>
-      </ul>
-    );
-} */
-
 import { useSelector } from "react-redux";
+import { convertToFahrenheit } from "../../ConvertDegree";
 
 const forecastCategoryNames = [
   "date",
@@ -65,9 +21,7 @@ export function ForecastBlock() {
 }
 
 function ForecastTable() {
-  const weatherForecast = useSelector(
-    (state) => state.weatherForecastReducer.weatherForecast
-  );
+  const weatherForecast = useSelector((state) => state.weatherForecastReducer.weatherForecast);
 
   return (
     <div className="forecast__table">
@@ -99,14 +53,20 @@ function ForecastTableHeader() {
 function ForecastTableRow(props) {
   const { date, time, feels_like, humidity, wind, temperature } = props;
 
+  const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
+
+  const feelsLike = tempScale === "F" ? convertToFahrenheit(feels_like) : feels_like;
+  const temp = tempScale === "F" ? convertToFahrenheit(temperature) : temperature;
+
+
   return (
     <ul className="forecast__info-item grid">
       <li>{date}</li>
       <li>{time}</li>
-      <li>{feels_like}</li>
-      <li>{humidity}</li>
-      <li>{wind}</li>
-      <li>{temperature}</li>
+      <li>{Math.round(feelsLike) + "°C"}</li>
+      <li>{humidity + " %"}</li>
+      <li>{wind + " k/h"}</li>
+      <li>{Math.round(temp) + "°C"}</li>
     </ul>
   );
 }

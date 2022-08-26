@@ -53,10 +53,10 @@ function getForecastArr(weatherForecastList) {
     const weatherForecastItem = {
       date: convertDate(weatherForecastList[i].dt),
       time: convertTime(weatherForecastList[i].dt),
-      feels_like: Math.round(weatherForecastList[i].main.feels_like) + "°C",
-      humidity: weatherForecastList[i].main.humidity + " %",
-      wind: weatherForecastList[i].wind.speed + " k/h",
-      temperature: Math.round(weatherForecastList[i].main.temp) + "°C",
+      feels_like: weatherForecastList[i].main.feels_like,
+      humidity: weatherForecastList[i].main.humidity,
+      wind: weatherForecastList[i].wind.speed,
+      temperature: weatherForecastList[i].main.temp,
     };
 
     forecastArr.push(weatherForecastItem);

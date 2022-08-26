@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setUnitDegree } from "../../store/slices/degreeSlice";
+import { setTempScale } from "../../store/slices/degreeSlice";
 
 export function DegreeFormatButton() {
-  const degreeUnit = useSelector((state) => state.degreeUnitReducer.degreeUnit);
+  const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
   const dispatch = useDispatch();
 
   let cDegereClassName = "";
   let fDegereClassName = "";
 
-  if (degreeUnit === "C") {
+  if (tempScale === "C") {
     cDegereClassName = "degree__bold";
   } else {
     fDegereClassName = "degree__bold";
@@ -16,7 +16,7 @@ export function DegreeFormatButton() {
 
 
   function handleClick() {
-    return degreeUnit === "C" ? dispatch(setUnitDegree("F")) : dispatch(setUnitDegree("C"))
+    return tempScale === "C" ? dispatch(setTempScale("F")) : dispatch(setTempScale("C"))
   }
 
   return (
