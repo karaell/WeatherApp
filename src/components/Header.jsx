@@ -14,7 +14,7 @@ export function Header() {
       <Logo />
       <SearchForm />
       <DegreeFormatButton />
-      <FavoriteCitiesButton />
+      {/* <FavoriteCitiesButton /> */}
     </div>
   );
 }
