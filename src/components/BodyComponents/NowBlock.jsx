@@ -32,15 +32,15 @@ function NowInfo(props) {
   const { weatherData } = props;
   const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
 
-  const degree = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp) : weatherData.main?.temp;
-
+  const degree = tempScale === "F" ? `${convertToFahrenheit(weatherData.main?.temp)}` : weatherData.main?.temp;
+  const scale = tempScale === "F" ? "°F" : "°C";
   return (
     <div className="now__info">
       <div className="now__info-city-name">{weatherData.name}</div>
       <div className="now__info-data-time">
         {convertDateTime(weatherData.dt)}
       </div>
-      <div className="now__info-degree">{checkDegree(Math.round(degree))}</div>
+      <div className="now__info-degree">{checkDegree(Math.round(degree))}{scale}</div>
     </div>
   );
 }
@@ -55,29 +55,42 @@ function NowDetails(props) {
   const maxTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_max) : weatherData.main?.temp_max;
   const minTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_min) : weatherData.main?.temp_min;
 
+  const scale = tempScale === "F" ? "°F" : "°C";
+
   return (
     <div className="now__details-items details-items">
       <NowDetailItem
         title="Feels like"
         subtitle={checkDegree(Math.round(feelsLike))}
+        scale={scale}
       />
-      <NowDetailItem title="Max" subtitle={checkDegree(Math.round(maxTemp))} />
-      <NowDetailItem title="Min" subtitle={checkDegree(Math.round(minTemp))} />
+      <NowDetailItem
+        title="Max"
+        subtitle={checkDegree(Math.round(maxTemp))}
+        scale={scale}
+      />
+      <NowDetailItem
+        title="Min"
+        subtitle={checkDegree(Math.round(minTemp))}
+        scale={scale}
+      />
     </div>
   );
 }
 
 function NowDetailItem(props) {
-  const { title, subtitle } = props;
+  const { title, subtitle, scale } = props;
 
   return (
     <div className="now__details-item">
       <div className="now__details-item-title">{title}</div>
-      <div className="now__details-item-subtitle">{subtitle}</div>
+      <div className="now__details-item-subtitle">{subtitle}{scale}</div>
     </div>
   );
 }
 
 function checkDegree (degree) {
-  return isNaN(degree) === true ? "" : degree + "°C";
+  return isNaN(degree) === true ? "" : degree;
 }
+
+// "°C";
