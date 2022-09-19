@@ -17,12 +17,14 @@ import { convertDate, convertTime } from "../ConvertDateTime";
 export function Body() {
   const currentCityName = useSelector((state) => state.cityNameReducer.city); // имя в запрос идет из стейта
   const dispatch = useDispatch();
-  // const currentCityName = store.get("cityName");
 
   async function showCurrentCity(cityName) {
     try {
-      const weatherDataNow = await getWeatherDataNow(cityName);
-      const weatherForecast = await getWeatherDataForecast(cityName);
+      const weatherData = await Promise.all([getWeatherDataNow(cityName), getWeatherDataForecast(cityName)]);
+      const [weatherDataNow, weatherForecast] = weatherData;
+
+      // const weatherDataNow = await getWeatherDataNow(cityName);
+      // const weatherForecast = await getWeatherDataForecast(cityName);
 
       const forecastArr = getForecastArr(weatherForecast.list);
 
