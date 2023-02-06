@@ -14,7 +14,6 @@ export async function getWeatherDataNow(cityName) {
   const objWeatherNow = await responseWeatherNow.json();
 
   return objWeatherNow;
-  // console.log(objWeatherDataNow);
 }
 
 export async function getWeatherDataForecast(cityName) {

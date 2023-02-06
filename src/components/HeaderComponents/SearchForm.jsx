@@ -24,10 +24,6 @@ export function SearchForm() {
     } finally {
         setCityName("");
     }
-
-    // dispatch(installCityName(e.target[0].value));
-
-    // setCityName("");
   }
 
   function handleInputChange(e) {

@@ -1,7 +1,5 @@
 import "../css/Header.css";
 
-// import { Logo } from "HeaderComponents/Logo";
-
 import { Logo } from "./HeaderComponents/Logo";
 import { SearchForm } from "./HeaderComponents/SearchForm";
 import { DegreeFormatButton } from "./HeaderComponents/DegreeFormatButton";
@@ -14,7 +12,6 @@ export function Header() {
       <Logo />
       <SearchForm />
       <DegreeFormatButton />
-      {/* <FavoriteCitiesButton /> */}
     </div>
   );
 }

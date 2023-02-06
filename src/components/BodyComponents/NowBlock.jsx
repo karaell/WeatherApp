@@ -49,8 +49,6 @@ function NowDetails(props) {
   const { weatherData } = props;
   const tempScale = useSelector((state) => state.tempScaleReducer.tempScale);
 
-  // TO_DO: придумать функцию для массовой проверки на фаренгейт
-
   const feelsLike = tempScale === "F" ? convertToFahrenheit(weatherData.main?.feels_like) : weatherData.main?.feels_like;
   const maxTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_max) : weatherData.main?.temp_max;
   const minTemp = tempScale === "F" ? convertToFahrenheit(weatherData.main?.temp_min) : weatherData.main?.temp_min;
@@ -92,5 +90,3 @@ function NowDetailItem(props) {
 function checkDegree (degree) {
   return isNaN(degree) === true ? "" : degree;
 }
-
-// "°C";

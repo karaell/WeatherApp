@@ -1,3 +1,5 @@
+import React from "react";
+
 import "../css/Body.css";
 import { useSelector } from "react-redux/es/exports";
 import { useEffect } from "react";
@@ -14,17 +16,15 @@ import { installWeatherForecast } from "../store/slices/weatherForecastSlice";
 
 import { convertDate, convertTime } from "../ConvertDateTime";
 
+
 export function Body() {
-  const currentCityName = useSelector((state) => state.cityNameReducer.city); // имя в запрос идет из стейта
+  const currentCityName = useSelector((state) => state.cityNameReducer.city);
   const dispatch = useDispatch();
 
   async function showCurrentCity(cityName) {
     try {
       const weatherData = await Promise.all([getWeatherDataNow(cityName), getWeatherDataForecast(cityName)]);
       const [weatherDataNow, weatherForecast] = weatherData;
-
-      // const weatherDataNow = await getWeatherDataNow(cityName);
-      // const weatherForecast = await getWeatherDataForecast(cityName);
 
       const forecastArr = getForecastArr(weatherForecast.list);
 
